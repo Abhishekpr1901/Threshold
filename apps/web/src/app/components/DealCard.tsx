@@ -71,3 +71,60 @@ export function DealCard({ deal }: { deal: Deal }) {
 }
 
 
+/*
+  ===== FILE EXPLANATION (Hinglish) =====
+
+  YE FILE KYU BANI:
+  Ye ek REUSABLE "card" component hai — ek deal ka data do, ye uska
+  image, price, discount, progress bar, aur time-left sab sundar
+  tareeke se ek clickable box mein dikha deta hai. Home page pe isi
+  component ko LOOP mein baar baar call karenge, har deal ke liye
+  ek alag card.
+
+  IMPORTS:
+  - Link (next/link) -> clickable link banata hai, pura page reload
+    nahi hota, sirf zaroori part change hota hai
+  - Image (next/image) -> Next.js ka special image component, auto
+    optimize karta hai
+  - Deal (from deals.ts) -> wahi type import kiya jo deals.ts mein
+    banaya tha, taaki pata rahe deal object mein kaunse fields hain
+
+  formatPrice() FUNCTION:
+  Price cents mein store hota hai (jaise 8999). Ye function usko
+  display-ready dollar format ($89.99) mein badalta hai. cents/100 se
+  dollars milta hai, Intl.NumberFormat sahi currency symbol/format
+  ke saath dikhata hai.
+
+  getTimeLeft() FUNCTION:
+  Deal ka expiresAt (string) leke "kitna time bacha hai" nikalta hai:
+  1. String ko Date object mein convert karke uska time nikalta hai
+  2. Usme se ABHI ka time (Date.now()) minus karta hai -> bacha hua
+     time milliseconds mein
+  3. Agar negative/zero hai -> "Expired" return
+  4. Warna milliseconds ko hours/minutes mein todke "Xh Ym left"
+     jaisa string banata hai
+
+  DealCard COMPONENT:
+  - Ek prop leta hai "deal" (type Deal ka), jo bhi data pass hoga
+    usi deal ka card banega
+  - percentFull calculate karta hai (currentParticipants /
+    targetParticipants * 100) -> progress bar ke liye
+  - Poora card ek Link hai -> click karne pe /deal/[slug] page pe
+    le jaata hai
+  - Image dikhata hai (unoptimized lagaya hai kyunki abhi placeholder
+    URLs use kar rahe hain, real photos nahi)
+  - dealPrice bold dikhata hai, originalPrice STRIKETHROUGH
+    (line-through) ke saath -> discount jaisa effect
+  - Progress bar: bahar wala div grey background (full width), andar
+    wala div sirf percentFull% tak bharta hai (inline style se width
+    set kiya kyunki ye DYNAMIC value hai, Tailwind class se fixed
+    nahi ho sakta)
+  - Neeche text mein "14 of 20 joined" aur "6h 30m left" dikhata hai,
+    dono helper functions ka use yahi ho raha hai
+
+  IMPORTANT BUG FIX (yaad rakhna):
+  Pehle deals.ts galti se app/data/ ke andar ban gayi thi, honi
+  chahiye thi src/data/ ke andar (app folder ke BAHAR, sibling ki
+  tarah). Isi wajah se "@/data/deals" import error aa raha tha -
+  path alias "@/*" sirf src/ ko point karta hai, app/data/ ko nahi.
+*/
