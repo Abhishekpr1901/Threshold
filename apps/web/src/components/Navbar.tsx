@@ -19,3 +19,28 @@ export function Navbar() {
 
 
 
+/*
+  ===== FILE EXPLANATION (Hinglish) =====
+
+  YE FILE KYU BANI:
+  Ye NAVBAR hai — website ke sabse upar hamesha dikhne wali strip
+  (logo + tagline). Isko layout.tsx mein wire karte hain taaki HAR
+  page pe automatically upar dikhe, bina har page mein alag-alag
+  copy-paste kiye.
+
+  Link COMPONENT:
+  next/link se aaya hai — normal <a> tag jaisa hi kaam karta hai
+  (clickable), lekin FAST hai kyunki pura page reload nahi hota,
+  sirf zaroori part hi change hota hai.
+
+  href="/" :
+  Logo pe click karne se HOME PAGE pe le jaata hai (root URL).
+
+  IMPORTANT BUG (yaad rakhna):
+  File ka naam GALTI SE lowercase "navbar.tsx" ban gaya tha, lekin
+  import statement mein capital "Navbar" likha tha ("@/components/
+  Navbar"). Linux/Codespaces mein filenames CASE-SENSITIVE hote hain
+  — navbar.tsx aur Navbar.tsx DO ALAG files samjhi jaati hain. Isliye
+  import fail ho raha tha. Fix: file ko rename kiya "mv navbar.tsx
+  Navbar.tsx" se, exact capital N ke saath jo import mein likha tha.
+*/
