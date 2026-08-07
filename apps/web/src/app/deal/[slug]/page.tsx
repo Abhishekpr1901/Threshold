@@ -84,3 +84,43 @@ export default async function DealPage({
     </main>
   );
 }
+
+
+/*
+  ===== FILE EXPLANATION (Hinglish) =====
+
+  YE FILE KYU BANI:
+  Ye ek SPECIFIC deal ka DETAIL page hai — jab kisi deal card pe click
+  karte hain, ye page khulta hai us exact deal ka poora data dikhane
+  ke liye.
+
+  [slug] FOLDER NAME (square brackets):
+  Ye Next.js ko batata hai "ye ek DYNAMIC ROUTE SEGMENT hai" — matlab
+  URL mein us jagah KOI BHI TEXT aa sakta hai (jaise /deal/headphones,
+  /deal/keyboard). Wo text automatically "slug" naam ke parameter mein
+  mil jaata hai code ke andar use karne ke liye.
+
+  generateStaticParams():
+  Next.js ko batata hai "in saari specific slugs ke liye pages BUILD
+  TIME PE HI bana do" (static generation) — na ki har request pe
+  compute karna pade runtime pe. Isliye page load bahut FAST hota hai.
+
+  params: Promise<{ slug: string }> aur await params:
+  Naye Next.js versions mein params ek PROMISE hoti hai (async), isliye
+  await karke uska actual VALUE nikaalna padta hai use karne se pehle.
+
+  getDealBySlug(slug):
+  URL se mile slug ko use karke deals.ts mein .find() se matching deal
+  dhoondh rahe hain.
+
+  if (!deal) { notFound(); }:
+  Agar koi deal match nahi hua (galat/invalid slug URL mein), Next.js
+  ka BUILT-IN notFound() function call karke user ko proper 404 page
+  dikhate hain — app crash hone ki jagah graceful handling.
+
+  percentFull CALCULATION (duplicate note):
+  Yahan bhi wahi progress % wala calculation hai jo DealCard.tsx mein
+  tha. Ye CODE DUPLICATION hai — future mein isko ek SHARED helper
+  function mein nikaal sakte hain (jaise lib/format.ts mein), taaki
+  dono jagah same function reuse ho, copy-paste na karna pade.
+*/
